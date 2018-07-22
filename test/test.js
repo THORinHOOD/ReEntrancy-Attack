@@ -52,9 +52,9 @@ contract("Test Investitions contract", function() {
         });
 
         it ("Проверка, что в Investions лежит 0 эфиров",  function() {
-            web3.eth.getBalance(investitions.address, function(err, res) {
-                expect(res.toString()).to.be.equal(web3.toWei(0, "ether"));
-            });
+            let expectedBalance = web3.toBigNumber(web3.toWei(0, 'ether'));
+            let actualBalance = web3.eth.getBalance(investitions.address);
+            assert.equal(actualBalance, expectedBalance, "На смарт-контракте что-то осталось!");
         });
     });
 
